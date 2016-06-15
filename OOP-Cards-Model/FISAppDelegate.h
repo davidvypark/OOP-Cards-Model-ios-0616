@@ -1,6 +1,8 @@
 //  FISAppDelegate.h
 
 #import <UIKit/UIKit.h>
+#import "FISCard.h"
+#import "FISCardDeck.h"
 
 @interface FISAppDelegate : UIResponder <UIApplicationDelegate>
 
