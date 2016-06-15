@@ -50,10 +50,24 @@
 
 -(void)gatherDealtCards {
     
+    [self.remainingCards addObjectsFromArray:self.dealtCards];
+    [self.dealtCards removeAllObjects];
+    
 
 }
 
 -(void)shuffleRemainingCards {
+    
+    NSMutableArray *tempArray = [self.remainingCards mutableCopy];
+    [self.remainingCards removeAllObjects];
+    
+    while([tempArray count] != 0) {
+        NSUInteger randomIndex = arc4random_uniform((int)[tempArray count]);
+        [self.remainingCards addObject:tempArray[randomIndex]];
+        [tempArray removeObjectAtIndex:randomIndex];
+        
+    }
+    
     
     
 }
@@ -72,6 +86,19 @@
     }
     
     
+}
+
+- (NSString *)description {
+    
+    NSMutableString *customString = [NSMutableString stringWithString:@"count:"];
+    
+    [customString appendFormat:@" %lu\ncards:\n", [self.remainingCards count]];
+    
+    for (FISCard *card in self.remainingCards) {
+        [customString appendFormat:@"  %@", card.description];
+    }
+    NSLog(@"%@", customString);
+    return customString;
 }
 
 @end
